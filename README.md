@@ -2,69 +2,87 @@
 
 This project solves a function-matching task using Python. It compares training data to a set of ideal functions, selects the best matches using least-squares error, evaluates test data against those ideal functions, stores all results in a SQLite database, and visualizes everything using interactive Bokeh plots.
 
-This project was developed as part of the IU Programming with Python assignment.
+This project was developed as part of the *Programming with Python* course at IU International University of Applied Sciences.
+
+**Submitted by:** Mehboob Hassan  
+**Matriculation Number:** 10246609  
+**Course Code:** DLMDSPWP01  
+**Study Program:** Master of Computer Science  
+**Submission Date:** 21 May 2025  
 
 ---
 
 ## Folder Structure
 
+```
 Assignment/
-├── data/ # CSV input files
-│ ├── training_data.csv
-│ ├── ideal_functions.csv
-│ └── test_data.csv
+├── data/                  # CSV input files
+│   ├── training_data.csv
+│   ├── ideal_functions.csv
+│   └── test_data.csv
 │
-├── db/ # SQLite database output
-│ └── data.db
+├── db/                    # SQLite database output
+│   └── data.db
 │
-├── src/ # Source code
-│ ├── main.py
-│ ├── Matcher.py
-│ ├── data_loader.py
-│ ├── visualizer.py
-│ └── database.py
+├── src/                   # Source code
+│   ├── main.py
+│   ├── matcher.py
+│   ├── data_loader.py
+│   ├── visualizer.py
+│   └── database.py
 │
-├── tests/ # Unit tests
-│ └── test_matcher.py
+├── tests/                 # Unit tests
+│   └── test_matcher.py
 │
-├── requirements.txt # List of required Python packages
-└── README.md # This file
+├── requirements.txt       # Python dependencies
+└── README.md              # This file
+```
+
+---
 
 ## Installation
 
-1. Clone the repository or copy the project files.
-2. Install required Python packages:
+1. Clone the repository or download the project files.
+2. Install the required Python packages:
 
-Python 3.8+ is recommended.
+```bash
+pip install -r requirements.txt
+```
+
+Python 3.8 or higher is recommended (tested with Python 3.12 on Windows 11).
 
 ---
 
 ## How to Run
 
-Run the project from the root folder:
+Run the main program from the root folder:
+
+```bash
+python src/main.py
+```
 
 This will:
-
-- Load the data from `data/`
-- Match each training function to the best ideal function using least-squares error
-- Map test data based on the max deviation × √2 rule
-- Visualize the results with Bokeh (plots open in your browser)
-- Save results into a SQLite database at `db/data.db`
+- Load input data from `data/`
+- Match training functions to ideal functions using least-squares error
+- Map test data using the max deviation × √2 rule
+- Generate interactive Bokeh plots in your browser
+- Save all processed results into `db/data.db`
 
 ---
 
 ## How It Works
 
-### 1. Training to Ideal Matching
-Each of the 4 training functions is compared against 50 ideal functions. The best match is selected using the sum of squared differences (least squares).
+### 1. Training to Ideal Function Matching  
+Each of the 4 training functions is compared against 50 ideal functions. The ideal function with the smallest sum of squared differences is selected using the least-squares method.
 
-### 2. Test Data Mapping
-Each test point is compared with the 4 selected ideal functions. If the difference is less than the maximum deviation from training × √2, it is assigned to that function.
+### 2. Test Data Mapping  
+Each test data point is checked against the 4 chosen ideal functions. A point is mapped if its deviation is within the allowed threshold (max deviation from training × √2).
 
-### 3. Database Storage
-- `training_data`: x and 4 y-values
-- `ideal_functions`: x and 50 ideal functions
-- `test_results`: test x, y, delta, and matched ideal function
+### 3. Database Storage  
+All outputs are stored in a local SQLite database:
+- `training_data` — x values and 4 training y columns
+- `ideal_functions` — x values and 50 ideal y columns
+- `test_results` — test x, y, delta, ideal function number, and test column
 
 ---
 
@@ -75,23 +93,23 @@ Each test point is compared with the 4 selected ideal functions. If the differen
 - numpy
 - bokeh
 - sqlalchemy
-- unittest (for unit testing)
+- unittest
 
 ---
 
 ## Output
 
-- Visuals open in browser (`.html` files)
-- `data.db` stores the processed results
-- All logic is OOP-structured
-- Includes at least one inheritance and one test case
+- Interactive visualizations using Bokeh (`.html`)
+- A SQLite database: `db/data.db`
+- Code is structured with object-oriented programming
+- Includes one subclass (`TrainingMatcher`) and a basic unit test
 
 ---
 
 ## Submission Notes
 
-- All Python code is in `src/` and `tests/`
-- All data files are in `data/`
-- One SQLite file is created in `db/`
-- Unit test file is located in `tests/`
-- The code was developed and tested using Windows 10 and Python 3.12
+- All Python scripts are in `src/` and `tests/`
+- Input CSV files are under `data/`
+- The generated database is stored in `db/`
+- Unit test script is inside `tests/`
+- This project was built and submitted for the DLMDSPWP01 assignment
