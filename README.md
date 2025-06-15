@@ -1,4 +1,4 @@
-# Function Matching and Evaluation System
+# WrittenAssignment_DLMDSPWP01
 
 This project solves a function-matching task using Python. It compares training data to a set of ideal functions, selects the best matches using least-squares error, evaluates test data against those ideal functions, stores all results in a SQLite database, and visualizes everything using interactive Bokeh plots.
 
